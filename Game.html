@@ -100,15 +100,23 @@
     let lives = 3;
     let gameOver = false;
 
-    // Move player
+    // Move player with mouse
     document.addEventListener("mousemove", (e) => {
       player.style.left = e.clientX - player.offsetWidth / 2 + "px";
     });
+
+    // Move player with keyboard arrows
     document.addEventListener("keydown", (e) => {
       let pos = player.offsetLeft;
       if (e.key === "ArrowLeft" && pos > 0) player.style.left = pos - 40 + "px";
       if (e.key === "ArrowRight" && pos < window.innerWidth - player.offsetWidth) player.style.left = pos + 40 + "px";
     });
+
+    // Move player with touch (mobile)
+    document.addEventListener("touchmove", function(e) {
+      const touch = e.touches[0];
+      player.style.left = touch.clientX - player.offsetWidth / 2 + "px";
+    }, { passive: false });
 
     // Item type
     function getItemType() {
